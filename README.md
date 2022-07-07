@@ -51,7 +51,7 @@ To check linting problems in API, run following command
 npm run lint:check
 ```
 
-, and to fix these problems, you can run
+and to fix these problems, you can run
 
 ```
 npm run lint:fix
