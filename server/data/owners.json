@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Ameer Hamza",
+        "email": "ameer@biz",
+        "phone": "123456789",
+        "address": "Islamabad"
+    },
+    {
+        "id": 2,
+        "name": "Usama Azad",
+        "email": "usama@biz",
+        "phone": "1234567810",
+        "address": "Islamabad"
+    },
+    {
+        "id": 3,
+        "name": "Muhammad Waqas",
+        "email": "waqas@biz",
+        "phone": "9101912223",
+        "address": "Wah Cantt"
+    },
+    {
+        "id": 4,
+        "name": "Developer",
+        "email": "developer@biz",
+        "phone": "1235213132",
+        "address": "Islamabad"
+    }
+]

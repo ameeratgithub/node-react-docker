@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "name": "Pet 1",
+        "colour": "white",
+        "age": 1,
+        "breed": "Breed 1",
+        "type": "cat",
+        "owner": 1
+    },
+    {
+        "id": 2,
+        "name": "Pet 2",
+        "colour": "black",
+        "age": 2,
+        "breed": "Breed 2",
+        "type": "cat",
+        "owner": 2
+    },
+    {
+        "id": 3,
+        "name": "Pet 3",
+        "colour": "gray",
+        "age": 1.5,
+        "breed": "Breed 1",
+        "type": "dog",
+        "owner": 1
+    },
+    {
+        "id": 4,
+        "name": "Pet 4",
+        "colour": "pink",
+        "age": 1,
+        "breed": "Breed 3",
+        "type": "cat",
+        "owner": 3
+    }
+]
