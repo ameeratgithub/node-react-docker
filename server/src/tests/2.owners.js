@@ -26,7 +26,7 @@ describe('Owners', () => {
           res.should.have.status(200);
           res.body.id.should.be.eq(1);
           res.body.pets.should.be.a('array');
-          res.body.pets.length.should.be.eql(2);
+          res.body.pets.length.should.be.eql(1);
           done();
         });
   });

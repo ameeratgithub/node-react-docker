@@ -1,41 +1,44 @@
 import { Stack, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import PetForm from "../../components/Pets/Form"
+import { getOwners } from "../../redux/actions/owners"
+import { getPet, updatePet } from "../../redux/actions/pets"
 
 
 function EditPet() {
     let navigate = useNavigate()
-    const [pet, setPet] = useState()
 
     let { id } = useParams();
 
-    useEffect(() => {
-        fetchPet()
-    }, [id])
 
-    const fetchPet = async () => {
-        const response = await fetch(`/api/pets/${id}`)
-        const _pet = await response.json()
-
-        setPet(_pet)
+    const fetchOwners = (state) => {
+        const owners = state.app.owners
+        if (owners)
+            return Array.isArray(owners) ? owners : owners?.payload
     }
+    
+    const state = useSelector(state => {
+        return { pet: state.app.pet, owners: fetchOwners(state) }
+    }, shallowEqual) || {}
+
+    
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getPet(id))
+        dispatch(getOwners())
+    }, [id, dispatch])
 
     const action = async (state) => {
-        const response = await fetch(`/api/pets/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(state)
-        })
-
-        await response.json()
+        dispatch(updatePet({ id, ...state }))
         navigate('/pets')
     }
     return <Stack direction='column' sx={{ maxWidth: '600px' }}>
         <Typography variant="h5" sx={{ textAlign: 'left', mb: '10px' }}>Edit Pet</Typography>
-        <PetForm action={action} pet={pet} />
+        {state?.pet?.name && <PetForm action={action} pet={state?.pet} owners={state?.owners} />}
     </Stack>
 
 }

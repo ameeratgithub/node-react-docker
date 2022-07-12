@@ -22,46 +22,44 @@ router.get('/owners/:id', async (req, res) => {
 
 router.get('/pets', async (req, res) => {
   const pets = await readPets();
+
   res.json(pets);
 });
 router.post('/pets', async (req, res) => {
   const pets = await readPets();
-  const {name, colour, age, breed, owner, type} = req.body;
-  const pet = {
-    id: pets.length + 1, name, colour, age, breed, owner, type,
-  };
-  pets.push(pet);
+
+  pets.push(req.body);
+
   await writePets(pets);
-  res.status(201).json(pet);
+
+  res.status(201).json(req.body);
 });
 
 router.get('/pets/:id', async (req, res) => {
   const pets = await readPets();
-  const pet = pets.filter((p) => p.id == req.params.id)[0] || {};
+  const pet = pets.filter((p) => p.id?.toString() === req.params.id)[0] || {};
   res.json(pet);
 });
 
 router.put('/pets/:id', async (req, res) => {
   const pets = await readPets();
 
-  const pet = pets.filter((p) => p.id == req.params.id)[0];
-  const newPets = pets.filter((p) => p.id != req.params.id);
+  const index = pets.findIndex((p) => p.id == req.params.id);
 
   const {name, colour, age, breed, owner, type} = req.body;
 
-  if (pet) {
-    pet.name = name;
-    pet.colour = colour;
-    pet.age = age;
-    pet.breed = breed;
-    pet.owner = owner;
-    pet.type = type;
+  if (index >= 0) {
+    pets[index].name = name;
+    pets[index].colour = colour;
+    pets[index].age = age;
+    pets[index].breed = breed;
+    pets[index].owner = owner;
+    pets[index].type = type;
   }
 
-  newPets.push(pet);
-  await writePets(newPets);
+  await writePets(pets);
 
-  res.json(pet);
+  res.json(pets[index]);
 });
 
 export default router;

@@ -37,7 +37,11 @@ function PetsContainer({ pets, addPet }) {
                     </TableRow>
                 </TableHead>
                 <TableBody component="div">
-                    <PetsList pets={pets} />
+                    {pets?.length > 0 ? <PetsList pets={pets} /> :
+                        <TableRow component="div">
+                            <TableCell component="div" align='center' colSpan={6} >No pet found</TableCell>
+                        </TableRow>
+                    }
                 </TableBody>
             </Table>
         </TableContainer>

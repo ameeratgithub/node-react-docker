@@ -12,26 +12,29 @@ import Owner from './pages/Owners/Details';
 import { Container } from '@mui/material';
 import EditPet from './pages/Pets/Edit';
 import AddPet from './pages/Pets/Add';
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
 
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Container sx={{mt:'50px', mb:'20px'}}>
-          <Routes>
-            <Route path='/pets' element={<Pets />} />
-            <Route path='/owners' element={<Owners />} />
-            <Route path='/owners/:id' element={<Owner />} />
-            <Route path='/pets/add' element={<AddPet />} />
-            <Route path='/pets/:id/edit' element={<EditPet />} />
-            <Route path='/' element={<Owners />} />
-          </Routes>
-        </Container>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Container sx={{ mt: '50px', mb: '20px' }}>
+            <Routes>
+              <Route path='/pets' element={<Pets />} />
+              <Route path='/owners' element={<Owners />} />
+              <Route path='/owners/:id' element={<Owner />} />
+              <Route path='/pets/add' element={<AddPet />} />
+              <Route path='/pets/:id/edit' element={<EditPet />} />
+              <Route path='/' element={<Owners />} />
+            </Routes>
+          </Container>
+        </Router>
+      </div>
+    </Provider>
   );
 }
 

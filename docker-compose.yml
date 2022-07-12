@@ -13,7 +13,7 @@ services:
   server:
     build:
       context: ./server/
-    command: /usr/app/node_modules/.bin/nodemon build/index.js
+    command: npm run dev
     volumes:
       - ./server/:/usr/app
       - /usr/app/node_modules

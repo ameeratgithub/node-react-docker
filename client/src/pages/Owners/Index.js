@@ -7,22 +7,26 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import OwnersList from '../../components/Owners/OwnersList';
 import { Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { getOwners } from '../../redux/actions/owners';
 
 
 
 
 function Owners() {
-    const [owners, setOwners] = useState([])
+
+    const owners = useSelector(state => {
+        const owners = state.app.owners
+        if (owners)
+            return Array.isArray(owners) ? owners : owners?.payload
+    }, shallowEqual) || []
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getOwners()
-    }, [])
-
-    const getOwners = async () => {
-        const resp = await fetch(`/api/owners`);
-        setOwners(await resp.json())
-    }
+        dispatch(getOwners())
+    }, [dispatch])
 
     return <>
         <Typography variant="h5" sx={{textAlign:'left', mb:'10px'}}>Owners</Typography>

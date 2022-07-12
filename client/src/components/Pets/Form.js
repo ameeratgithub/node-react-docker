@@ -1,7 +1,7 @@
-import { Button, Stack, TextField } from "@mui/material"
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 
-function PetForm({ pet, action }) {
+function PetForm({ pet, action, owners }) {
 
     const [state, setState] = useState({
         name: '', colour: '', age: '', breed: '', type: '', owner: ''
@@ -31,7 +31,17 @@ function PetForm({ pet, action }) {
         <TextField name="age" label="Age (years)" variant="outlined" value={state.age} onChange={handleChange} />
         <TextField name="breed" label="Breed" variant="outlined" value={state.breed} onChange={handleChange} />
         <TextField name="type" label="Type" variant="outlined" value={state.type} onChange={handleChange} />
-        <TextField name="owner" label="Owner" variant="outlined" value={state.owner} onChange={handleChange} />
+        <FormControl fullWidth>
+            <InputLabel id="lable-owner">Owner</InputLabel>
+            <Select
+                value={state.owner}
+                label="Owner"
+                name="owner"
+                onChange={handleChange}
+            >
+                {owners.map(o => <MenuItem value={o.id} key={o.id}>{o.name}</MenuItem>)}
+            </Select>
+        </FormControl>
         <Button variant="contained" onClick={handleAction}>Submit</Button>
     </Stack>
 }
